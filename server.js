@@ -1,5 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
+const helmet = require('helmet')
+//Set access control to allow origin with CORS
 // Change colors of messages in console
 const colors = require('colors')
 const errorHandler = require('./middleware/errorMiddleWare')
@@ -9,14 +11,14 @@ const connectDB = require('./config/db')
 connectDB()
 
 const app = express()
-const helmet = require('helmet')
-const { default: mongoose } = require('mongoose')
 
-// Make app secure
+/* Make app secure */
 // Set security headers 
 // app.use(helmet())
 // // Reduce server fingerprinting
 // app.disable('x-powered-by')
+// Make https by setting httponly
+// Enable compression for express to save bandwidth with compress()
 
 // Set body parser middleware to send json object
 app.use(express.json())

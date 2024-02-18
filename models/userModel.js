@@ -6,13 +6,29 @@ const validateEmail = (email) => {
     return regex.test(email)
 }
 
-const UserSchema = new Schema({
+
+const userSchema = mongoose.Schema({
+    name: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
     email: {
-        type: String,
-        required: 'Email address required'
-    }
-})
+      type: String,
+      required: [true, "Please add an email"],
+      unique: true
+    },
+    password: {
+      type: String,
+      required: [true, "Please add a password"],
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },{
+      timestamps: true
+  });
 
-const UserModel = mongoose.model('user', UserSchema)
-
-module.exports = UserModel
+  module.exports = mongoose.model('User',userSchema)
+  
