@@ -25,15 +25,13 @@ const verifyUserIsAuthorizedByToken = asyncHandler(async (req, res, next) => {
   }
 
   // If there is no token throw error
+ jsonWebTokenNotFound(res,tokenFromHeader)
+});
+
+const jsonWebTokenNotFound = (res,tokenFromHeader) => {
   if (!tokenFromHeader) {
     throwError(res, 401, "Not Authorized");
   }
-});
-
-// const jsonWebTokenNotFound = (token) => {
-//   if (!token) {
-//     throwError(res, 401, "Not Authorized");
-//   }
-// };
+};
 
 module.exports = { verifyUserIsAuthorizedByToken }
