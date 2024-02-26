@@ -1,23 +1,30 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
-const jwt = require('jsonwebtoken')
-const throwError = require('../throwError')
+const jwt = require("jsonwebtoken");
+const throwError = require("../throwError");
 
 // Route: /users
 // Wrap function in asyncHandler
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
-  // console.log(user)
+  
+  // if(Object.keys(req.body).length == 0){
+  //   req.body = req.query;
+  // }
+  // const { name, email, password } = req.body;
+
+  // Data moved to req.query
+  const { name, email, password } = req.query
+
 
   if (!name || !email || !password) {
-    throwError(res,400,'Please include all fields')
+    throwError(res, 400, "Please include all fields");
   }
 
   // Find if user already exists
   const userExists = await User.findOne({ email });
   if (userExists) {
-    throwError(res,400,'User already Exists')
+    throwError(res, 400, "User already Exists");
   }
 
   // Call hashedPassword
@@ -38,16 +45,23 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       // send a jsonwebtoken
-      token: generateJsonWebToken(user._id)
+      token: generateJsonWebToken(user._id),
     });
   } else {
-    throwError(res,400,'Invalid User data')
+    throwError(res, 400, "Invalid User data");
   }
 });
 
 // Route: /users/login
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  // if(Object.keys(req.body).length == 0){
+  //   req.body = req.query;
+  // }
+  // console.log(req)
+  // const { email, password } = req.body;
+  
+  // Data moved to req.query
+  const { email, password } = req.query
   const user = await User.findOne({ email });
 
   // Check if user and passwords match
@@ -56,35 +70,34 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      token: generateJsonWebToken(user._id)
+      token: generateJsonWebToken(user._id),
     });
-  }
-  else {
-    throwError(res,401,'Invalid credentials')
+  } else {
+    throwError(res, 401, "Invalid credentials");
   }
 });
 
 // Route: /users/me
 // Description: Get current User
-const getCurrentUserAccountInfo = asyncHandler(async (req,res) => {
-    const user = {
-        id: req.user._id,
-        name: req.user.name,
-        email: req.user.email,
-    }
-    res.status(200).json(user)
-})
+const getCurrentUserAccountInfo = asyncHandler(async (req, res) => {
+  const user = {
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  };
+  res.status(200).json(user);
+});
 
 // Generate token
 const generateJsonWebToken = (id) => {
-    // get secret from .env and set to expire in 30 days
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '30d'
-    })
-}
+  // get secret from .env and set to expire in 30 days
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+};
 
 module.exports = {
   registerUser,
   loginUser,
-  getCurrentUserAccountInfo
+  getCurrentUserAccountInfo,
 };
