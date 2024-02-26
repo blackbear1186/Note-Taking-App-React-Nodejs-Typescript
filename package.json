@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "server": "nodemon server.js",
-    "client": "npm run start --prefix frontend",
+    "client": "npm run client --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "Berlin Johnson",

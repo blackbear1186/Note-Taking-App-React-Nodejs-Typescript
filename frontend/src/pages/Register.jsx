@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {FaUser} from 'react-icons/fa'
+import {toast} from 'react-toastify'
 
 function Register() {
 
@@ -18,6 +19,14 @@ function Register() {
             [e.target.name]: e.target.value
         }))
     }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        if(password !== passwordConfirm){
+           toast.error('passwords do not match')
+        }
+    }
   return (
     <div className='text-center'>
         <section className='flex flex-col'>
@@ -27,7 +36,8 @@ function Register() {
             <p>Please create an account</p>
         </section>
         <section className='text-center'>
-            <form className=''>
+            <form onSubmit={onSubmit}>
+
                 <div>
                 <input type='text' 
                 className='mb-4 rounded w-52'
@@ -36,8 +46,10 @@ function Register() {
                 // name is the same as state
                 name='name'
                 onChange={onChange}
-                placeholder='Enter your name' />
+                placeholder='Enter your name' 
+                required/>
                 </div>
+
                 <div>
                 <input type='email' 
                 className='mb-4 rounded w-52'
@@ -46,8 +58,10 @@ function Register() {
                 // name is the same as state
                 name='email'
                 onChange={onChange}
-                placeholder='Enter your email' />
+                placeholder='Enter your email' 
+                required/>
                 </div>
+
                 <div>
                 <input type='password' 
                 className='mb-4 rounded w-52'
@@ -56,8 +70,10 @@ function Register() {
                 // name is the same as state
                 name='password'
                 onChange={onChange}
-                placeholder='Enter your password' />
+                placeholder='Enter your password' 
+                required/>
                 </div>
+
                 <div>
                 <input type='password' 
                 id='passwordConfirm'
@@ -66,9 +82,12 @@ function Register() {
                 // name is the same as state
                 name='passwordConfirm'
                 onChange={onChange}
-                placeholder='Confirm password' />
+                placeholder='Confirm password' 
+                required/>
                 </div>
-                    <button className='bg-blue-500 hover:bg-blue-700 font-bold rounded h-10 w-52'>Create Account</button>
+
+                <button className='bg-blue-500 hover:bg-blue-700 font-bold rounded h-10 w-52'
+                >Create Account</button>
             </form>
 
         </section>

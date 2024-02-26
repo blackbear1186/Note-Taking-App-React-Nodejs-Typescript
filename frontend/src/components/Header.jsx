@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className='header flex justify-between'>
       <div className='logo'>
-        <Link to='/'>Support Desk</Link>
+        <Link to='/'>Home</Link>
       </div>
       <ul className='flex'>
         <li className='mr-1'>
