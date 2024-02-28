@@ -29,7 +29,7 @@ function Login() {
             <h1 className='flex justify-center'>
                 <FaSignInAlt className=''/> Login
             </h1>
-            <p>Please login in Take Note</p>
+            <p>Please login into Take Note</p>
         </section>
         <section className='text-center'>
             <form onSubmit={onSubmit}>

@@ -1,12 +1,13 @@
 import {FaSignInAlt,FaSignOutAlt,FaUser} from 'react-icons/fa'
-
 import {Link} from 'react-router-dom'
 
 function Header() {
   return (
     <header className='header flex justify-between'>
       <div className='logo'>
-        <Link to='/'>Home</Link>
+  
+        <Link to='/'>
+          Take Note</Link>
       </div>
       <ul className='flex'>
         <li className='mr-1'>

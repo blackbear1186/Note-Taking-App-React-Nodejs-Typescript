@@ -9,7 +9,7 @@ function Home() {
       <p>If you already have an account</p>
       <Link to='/login'>
         <button 
-        className='bg-white hover:bg-gray-100 text-gray-800 font-semibold 
+        className='bg-green-500 hover:bg-green-100 text-green-800 font-semibold 
         shadow border border-gray-100 rounded h-10 w-52 mb-4'>
           Login</button>
       
