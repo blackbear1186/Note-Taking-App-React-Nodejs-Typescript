@@ -8,6 +8,7 @@ function Home() {
       <h3>Start taking notes today</h3>
       <p>If you already have an account</p>
       <Link to='/login'>
+        
         <button 
         className='bg-green-500 hover:bg-green-100 text-green-800 font-semibold 
         shadow border border-gray-100 rounded h-10 w-52 mb-4'>

@@ -11,13 +11,13 @@ function Header() {
       </div>
       <ul className='flex'>
         <li className='mr-1'>
-            <Link to='/login' className='flex items-center'>
-                <FaSignInAlt/> Login
+            <Link to='/login' className='flex items-center m-2'>
+                <FaSignInAlt/>
             </Link>
         </li>
         <li>
-            <Link to='/register' className='flex items-center'>
-                <FaUser/> Register
+            <Link to='/register' className='flex items-center m-2'>
+                <FaUser/>
             </Link>
         </li>
       </ul>
